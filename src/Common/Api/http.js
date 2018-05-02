@@ -4,7 +4,6 @@ import storage from '@system.storage'
 
  function request(method,url,data){
     let resurl = 'http://tshop.zrbao.net/index.php/api/';
-    // let resurl = 'http://tshop.zrbao.net/index.php/apiwl/' 
     let baseData = {'Tadpole':{"Tadpole":{"Head": { "channel": "01", "version": "1.0.0", "service": "dataQuery" }, "Body": { }}} };
     Object.assign(baseData['Tadpole']['Tadpole']['Body'],data)
     return new Promise((resolve, reject) => {
