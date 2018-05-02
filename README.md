@@ -3,7 +3,7 @@
  
  ### 安装运行
  ```
-  1. git clone https://github.com/niuhuahua/kedou.git
+ 1. git clone https://github.com/niuhuahua/kedou.git
 
  2. 运行`npm install` 安装依赖 建议用淘宝镜像 cnpm
 
@@ -17,7 +17,7 @@
  ### 效果图
  
  #### 登录
-  ![](./img/login.png)
+  ![](./img/login.jpg)
  
  
  
