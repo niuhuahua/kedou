@@ -1,0 +1,95 @@
+<style lang="less">
+        .orderitem-page{flex-direction: column; }
+        .title{
+           height: 80px; background-color: #FCEAD0;padding: 0 28px; align-items: center; justify-content: space-between;}
+         .title_time{font-size: 28px; }
+         .title_order{font-size: 28px;}
+         .title_type{color: #ff7200; font-size: 28px;}
+         .product{
+              height: 200px; border-bottom-color: #e1e1e1;border-bottom-width: 1px;
+             .pro_img-div{
+                height: 200px;width:200px; justify-content: center;align-items: center;
+                .prpd_img{width: 139px;height: 139px;}
+             }
+    
+            .pro-name-div{
+                width:350px;height: 200px; flex-direction: column; 
+                /*  -webkit-box-orient:vertical;-webkit-lint-clamp:2;overflow: hidden; */
+                .text-name-pro{ color: #2d2d2d; font-size: 26px ;margin-top: 30px;  }
+                .text-type{font-size: 24px; color: #a1a1a1;margin-top: 30px; }
+            }
+        
+            .prod-price{flex-direction: column;  width: 200px;
+                .priceColor{
+                    color: #ff7200;;margin-top: 30px;
+                    .yuan{font-size: 34px; color: #ff7200; }
+                    .yuan-num{font-size: 44px; color: #ff7200; }
+                }
+            .price-num{font-size: 28px;color: #a1a1a1; ;margin-top: 30px;}
+            }
+            
+         }
+        
+      .pro-num{
+         height: 100px; align-items: center; border-bottom-color: #e1e1e1;border-bottom-width: 1px; justify-content:space-between;
+         .all-num{
+             padding-left: 32px;font-size:24px; color:#a1a1a1;
+         }
+         .all-fu-color{
+             padding-right: 30px;
+             .fu-name{font-size: 24px; }
+             .fu-yun{ font-size: 24px;color: #a1a1a1; }
+         }
+      }
+      .pro-type{
+          height: 112px; align-items: center; border-bottom-color: #e1e1e1;border-bottom-width: 1px; 
+          .btn{height: 70px;width:160px; align-items:center;justify-content: center; font-size:28px;border-radius: 4px; margin-left: 20px; }
+          .btn-defalut {border-width: 1px; border-color: #a1a1a1; color: #666666; }
+          .btn-backg {border-width: 1px; border-color: #ff7200; background-color: #ff7200; color: #fff; }
+          .btn-backglight{border-width: 1px; border-color: #ffe1b6; background-color: #ffe1b6;   }
+          .backglight{ color: #ff7200;}
+          .backg{ color: #ffffff; }
+       }
+</style>
+  <template>
+    <div class="orderitem-page">
+            <div class="title">
+                    <text class="title_time">2018-06-34</text>
+                    <text class="title_order">订单编号：4283492842309482</text>
+                    <text class="title_type">待评价</text>
+                </div>
+                <div class="product">
+                    <div class="pro_img-div">
+                        <img src="../Common//Image/android.jpg" class="prpd_img">
+                    </div>
+                    <div class="pro-name-div">
+                        <text class="text-name-pro">副驾驶的集散地啥事防守打法胜多负少发酵粉斯蒂</text> 
+                        <text class="text-type">宝石 霎时刻</text>  
+                    </div>
+                    <div class="prod-price">
+                      <text class="priceColor"><span class="yuan">￥</span> <span class="yuan-num">142.00</span></text> 
+                      <text class="price-num">X 2</text> 
+                    </div>
+                </div>
+                <div class="pro-num">
+                    <text class="all-num">共3件商品</text>
+                    <text class="all-fu-color"><span class="fu-name">实付：</span> <span class="yuan">￥</span> <span class="yuan-num">23423.00</span> <span class="fu-yun">（含运费￥3210.00）</span> </text>
+                </div>
+                <div class="pro-type">
+                  <div class="btn btn-defalut">
+                     <text>删除订单</text>
+                  </div>
+                  <div class="btn btn-backglight">
+                       <text class="backglight">共如何围</text>
+                   </div>
+                  <div class="btn btn-backg">
+                      <text class="backg">取消订单</text>
+                  </div>
+                </div>
+    </div>
+</template>
+<script>
+    export default {
+
+    }
+</script>

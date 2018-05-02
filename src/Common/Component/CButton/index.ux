@@ -1,0 +1,21 @@
+<style lang="less">
+@import url('../../style/mixin.less');
+.btn{ display: flex; color: #ffffff; border-radius: 6px; text-align: center;line-height: 90px; background-color: @orangeBtn; .wh(640px,90px);}
+</style>
+<template>
+    <div>
+     <div><text class="btn" @click="toNext">{{btntext}}</text></div>
+    </div>
+</template>
+<script>
+ export default {
+     props:['btntext'],
+     data:()=>{
+
+     },
+     toNext(){ //坑三 子组件传递给父组件的事件不能有大写 
+         console.log("子组件按钮被点击")
+         this.$dispatch('clickbtn',{ })
+     }
+ }
+</script>

@@ -1,0 +1,87 @@
+<style lang="less">
+ .flex-tabs{
+     flex-direction:column;
+     .flex-tabs{display: flex;  }
+ }
+ .flex-tabbar{
+     border-top-width: 1px; border-top-color: #dddddd; padding-top: 8px;
+  .tab-item{
+      flex-direction: column;flex:1;padding:10px;justify-content: center;  align-items: center;
+      .tab-img{
+          width: 48px;height: 50px;margin-bottom: 5px;
+      }
+      .tab-active{color: #ff9600;font-size: 24px;}
+      .tab-text{ color: #313131;font-size: 24px; }
+  }
+ }
+</style>
+<template>
+    <div class="kebottom-page">
+      <div class="flex-tabs">
+         <tabs @change="changeTabActive" index="{{currentIndex}}">
+           <tab-content>
+             <div>
+                 <home if="{{tabItems[0].show}}"></home>
+             </div>
+             <div class="tab-content-section">
+			   <home if="{{tabItems[1].show}}"></home>
+              </div>
+              <div class="tab-content-section">
+                  <home if="{{tabItems[2].show}}"></home>
+              </div>
+              <div class="tab-content-section">
+                    <me if="{{tabItems[3].show}}"></me>
+              </div>
+           </tab-content>
+         </tabs>
+         <div class="flex-tabbar">
+            <div class="tab-item" for="{{(index,item) in tabItems}}" @click="clickTabBar(index)">
+                <img src="{{item.icon[currentIndex==index?1:0]}}" class="tab-img">
+                <text class="{{currentIndex==index?'tab-active':'tab-text'}}">{{item.text}}</text>
+            </div>
+         </div>
+      </div>
+    </div>
+</template>
+<import name="home" src="../Order/index.ux"></import>
+<import name="me" src="../Home/kdIndex.ux"></import>
+<script>
+    export default {
+      data(){
+          return{
+            currentIndex:0,
+            tabItems:[
+                {
+                    text:'首页',
+                    icon:['../Common/Image/kdimg/bottom/icon_homepage.png','../Common/Image/kdimg/bottom/icon_homepage_select.png'],
+                    show:true
+                },
+                {
+                    text:'蝌蚪家',
+                    icon:['../Common/Image/kdimg/bottom/icon_kedoujia.png','../Common/Image/kdimg/bottom/icon_kedoujia_select.png'],
+                    show:false
+                },
+                {
+                    text:'购物车',
+                    icon:['../Common/Image/kdimg/bottom/icon_shoppingcart.png','../Common/Image/kdimg/bottom/icon_shoppingcart_select.png'],
+                    show:false
+                },
+                {
+                    text:'我的',
+                    icon:['../Common/Image/kdimg/bottom/icon_member.png','../Common/Image/kdimg/bottom/icon_member_select.png'],
+                    show:false
+                },
+            ]
+          }
+      },
+      clickTabBar(index){
+        this.$page.setTitleBar({ text: this.tabItems[index].text })
+        this.currentIndex = index;
+        this.tabItems[index].show = true;
+      },
+      changeTabActive(evt){
+          this.clickTabBar(evt.index)
+
+      }
+    }
+</script>

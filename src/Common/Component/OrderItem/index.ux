@@ -1,0 +1,68 @@
+<style lang="less">
+     .item{
+         width:100%; margin:0;
+     }
+     .per-list {
+    flex: 1;}
+</style>
+<import name="protem" src="../OrderItem/listPro.ux"></import>
+<template>
+  <refresh class="orderitem-page" refreshing="{{refreshing}}"  onrefresh="refresh" >
+        <list onscrollbottom="renderMoreListItem" class="per-list">
+               
+                  <!-- <block for="productList"> -->
+                      <list-item type="item" class="item">
+                          <protem></protem>
+                      </list-item>
+                  <!-- </block> -->
+                  <!-- <list-item type="loadStatus" class="load-status">
+                      <progress style="color: {{theme.color}}" type="circular" show="{{hasMoreData}}"></progress>
+                      <text class="loading" show="{{hasMoreData}}">加载更多···</text>
+                      <text show="{{!hasMoreData}}">没有更多了~</text>
+                  </list-item>  -->
+        </list>
+</template>
+<script>
+    import {getOrderList} from '../../Api/order.js'
+   
+    export default {
+      data(){
+          return {
+            refreshing:false
+          }
+      },
+      onInit(){
+          let that = this;
+        //   setTimeout(()=>{
+        //     that.$app.$def.storage.get({
+        //      key:'token',
+        //      success:function(data){
+        //     //   console.log("获取的token值",JSON.stringify(data))
+        //     //   let param = {keytype:"0",page:'1',keyword:'',token:data }
+        //     //     console.log("pram------->",JSON.stringify(param))
+        //     //     getOrderList(param).then((res)=>{
+        //     //     console.log("onInit-------->",res)
+        //     //     }).catch((err)=>{
+        //     //     console.log("出错了onInit----->",err)
+        //     //     }) 
+        //      },
+        //      fail:function(data,code){
+
+        //      }
+        //    }) 
+        //   },3000)
+            //   let param = {keytype:"0",page:'1',keyword:'',token:"TK_aI1X4K_163_3" }
+            //     getOrderList(param).then((res)=>{
+            //         console.log("onInit-------->",res)
+            //     }).catch((err)=>{
+            //         console.log("出错了onInit----->",err)
+            //     }) 
+          
+
+      },
+      renderMoreListItem(){
+
+      }
+
+    }
+</script>

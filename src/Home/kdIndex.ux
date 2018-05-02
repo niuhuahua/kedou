@@ -1,0 +1,159 @@
+<style lang="less">
+   .home{
+    flex-direction: column;
+   .header_avatar {width: 100%;height: 470px;background-image: url('../Common/Image/kdimg/home/background.png'); align-items: center;justify-content:center;
+       .avtar{width: 120px;height: 120px;}
+       .username {font-size: 26px;color: #ffffff;margin-top: 180px;}  
+      }
+    .home_secon{height: 150px; border-bottom-width: 1px ; border-bottom-color: #e1e1e1;
+        .home_seco_two{width: 50%;height: 100%; flex-direction:column; justify-content: center;align-items: center }
+        .redColor{color: #F00000; }
+        .orangeColor{color:#ff9600; }
+        .two_text{display: flex;flex-direction: column; }
+        .text_num{ font-size: 40px;}
+        .text_name{ font-size: 32px;}
+    }
+    .home_secon_another{margin-top: 30px;height: 1px; width:100%; border-bottom-width: 1px; border-bottom-color: #e1e1e1; }
+    .home_three{flex-direction: column; }
+    .home_three_two{ height: 188px; border-bottom-color: #e1e1e1;border-bottom-width: 1px;}
+    .top_four{width: 25%; height: 188px;border-left-width: 1px ; border-left-color: #e1e1e1; flex-direction: column; justify-content:center ;  align-items: center;}
+    .four_img{width: 68px;height: 68px; }
+    .four_text{font-size: 24px; color: #2d2d2d; margin-top: 22px; }
+}
+</style>
+<template>
+ <div class="home">
+    
+    <stack class="header_avatar"  if="{{isLogin}}">
+        <image class="avtar" src="{{user.avatar_thumb}}"></image>
+        <text class="username">{{user.user_nicename}}</text>
+        <!-- <a href="../Auth/login.ux" class="username">登录</a> -->
+    </stack>
+    <stack class="header_avatar" else>
+            <image class="avtar" src="../Common/Image/kdimg/home/defaultIcon.png"></image>
+            <text class="username" else @click="toLogin">登录/注册</text>
+            <!-- <a href="../Auth/login.ux" class="username">登录</a> -->
+    </stack>
+    <div class="home_secon" if="{{cunfu=='1'}}">
+      <div class="home_seco_two">
+         <div class="two_div">
+            <text class="two_text text_num redColor">{{user.user_commision}}</text>
+         </div>
+         <div class="two_div">
+            <text class="two_text text_name redColor">收益</text>
+         </div>
+      </div>
+      <div style="border: 1px solid #c1c1c1;width: 1px; height: 70px;margin-top: 25px;"></div>
+      <div class="home_seco_two">
+        <div class="two_div"> 
+            <text class="two_text text_num orangeColor">{{user.score}}</text>
+        </div>
+        <div class="two_div">
+           <text class="two_text text_name orangeColor">积分</text>
+        </div>
+      </div>
+    </div>
+    <div class="home_secon_another" if="{{cunfu=='2'}}" ></div>
+    <div class="home_three">
+       <div class="home_three_two">
+          <div class="top_four">
+              <img src="../Common//Image//kdimg//home/icon_full_order.png" class="four_img">
+              <div>
+                  <text class="four_text">全部订单</text>
+              </div>
+          </div>
+          <div class="top_four">
+                <img src="../Common//Image//kdimg//home/icon_obligations.png" class="four_img">
+                <div>
+                    <text class="four_text">代付款</text>
+                </div>
+           </div>
+            <div class="top_four">
+                    <img src="../Common//Image//kdimg//home/icon_daisouhuo.png" class="four_img" style="width:78px;">
+                    <div>
+                        <text class="four_text">待收货</text>
+                    </div>
+            </div>
+            <div class="top_four">
+                        <img src="../Common//Image//kdimg//home/icon_evaluation.png" class="four_img">
+                        <div>
+                            <text class="four_text">待评价</text>
+                        </div>
+           </div>
+       </div>
+       <div class="home_three_two">
+            <div class="top_four">
+                    <img src="../Common//Image//kdimg//home/icon_message.png" class="four_img">
+                    <div>
+                        <text class="four_text">消息中心</text>
+                    </div>
+                </div>
+                <div class="top_four">
+                      <img src="../Common//Image//kdimg//home/icon_account.png" class="four_img">
+                      <div>
+                          <text class="four_text">账号管理</text>
+                      </div>
+                 </div>
+                  <div class="top_four">
+                          <img src="../Common//Image//kdimg//home/icon_service.png" class="four_img">
+                          <div>
+                              <text class="four_text">客服</text>
+                          </div>
+                  </div>
+                  <div class="top_four">
+                              <img src="../Common//Image//kdimg//home/icon_about.png" class="four_img">
+                              <div>
+                                  <text class="four_text">关于我们</text>
+                              </div>
+                 </div>
+        </div>
+    </div>
+ </div>
+</template>
+<import name="login" src="../Login/index.ux"></import>
+
+<script>
+     import {getUserInfo}  from '../Common/Api/kduser.js' 
+    export default {
+      data(){
+          return{
+              cunfu:'',
+              isLogin:false,
+              user:{}
+          }
+      },
+      onInit(){
+          let param = {'token':'TK_tIXNIB_163_3'}  //已经证明是token问题 
+            getUserInfo(param).then((res)=>{
+            }).catch((err)=>{
+                console.log("页面获取用户信息-- 是吧----->",JSON.stringify(err))
+            })
+        // let that = this;
+        // this.$app.$def.storage.get({
+        //     key:'user',
+        //     success:function(data){
+        //     that.user = JSON.parse(data)
+        //     that.cunfu = that.user.is_commision;
+        //       console.log("data---->",JSON.stringify(data))
+        //     }.bind(this),
+        //     fail:function(data,code){
+        //       console.log("不存在哦")
+        //     }.bind(this)
+        // })
+        // this.$app.$def.storage.get({
+        //         key:'token',
+        //         success:function(data){
+        //         if(data){
+        //            that.isLogin = true;
+        //         }
+        //     }.bind(this),
+        //     fail:function(data,code){
+        //     console.log("获取token失效")
+        //     }.bind(this)
+        // })
+      },
+      toLogin(){
+         
+      }
+    }
+</script>

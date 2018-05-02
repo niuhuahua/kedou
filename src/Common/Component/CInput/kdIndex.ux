@@ -1,0 +1,58 @@
+
+<style lang='less'>
+    @height:90px;
+   
+     .login_phone{ width: 640px; height: @height;border: 1px solid #a1a1a1; border-radius: 6px;justify-content: center; margin-bottom:30px;
+        .iconImg_div{ width: 70px;  height: @height;justify-content: center;align-items: center;}
+        .eyeImg_div { width: 80px;  height: @height; justify-content: center;align-items: center;}
+        .login_Input{ font-size:30px; width: 490px; }
+        .iconImg{ width:60px;height: 60px; }
+        .phone_Input{ font-size:30px; width: 550px; }
+        .iconImgpwd{width: 45px;height: 45px }
+     }
+</style>
+<!-- 此时的图片路径为引入文件开始算得 -->
+<template>
+    <div class="login_phone">
+         <div class="iconImg_div"><image src="{{iconimg}}" class="iconImg"></image></div>
+         <block if='{{ispwd}}'>
+                <input type="password" if='{{eyePwdClose}}' @change="onInputVal" value="{{pwdValue}}" placeholder="请输入密码" class="login_Input">
+                <input type="text" else  @change="onInputVal"  value="{{pwdValue}}" placeholder="请输入密码"   class="login_Input">
+                <div class="eyeImg_div" if="{{eyePwdClose}}" @click='changeType'> <image src="../Common/Image/kdimg/login/eye_close.png" class="iconImgpwd"></image>  </div>
+                <div class="eyeImg_div" else @click='changeType' > <image src="../Common/Image/kdimg/login/eye_open.png" class="iconImgpwd"></image>  </div>
+         </block>
+         <block else>
+                <input type="text" else  @change="onInputValPhone"  value="{{phoneVlaue}}" placeholder="请输入手机号码"   class="phone_Input">
+         </block>
+    </div>
+</template>
+
+<script>
+    // 坑1：传递的props key不能有大写 不识别
+export default {
+    props:['ispwd','iconimg'],
+    data: () => ({
+        eyePwdClose:true,
+        pwdValue:'',
+        phoneVlaue:''
+  }),
+  onInit(){
+      this.$on('pChangeInput', this.pChangeInput)
+  },
+  onInputVal({value}){
+    this.pwdValue = value;
+    this.$dispatch('inputchange',{value:value})
+  },
+  onInputValPhone({value}){
+    this.pwdphoneVlaueValue = value;
+    this.$dispatch('inputchange',{value:value})
+  },
+  changeType(){
+      this.eyePwdClose = !this.eyePwdClose;
+  },
+  pChangeInput({detail:{value}}){
+      this.phoneVlaue = value;
+  }
+}
+</script>
+

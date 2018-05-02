@@ -1,0 +1,56 @@
+{
+  "package": "cn.codebear.wanandroid",
+  "name": "wanandroid",
+  "versionName": "1.0.2",
+  "versionCode": "3",
+  "minPlatformVersion": "101",
+  "icon": "/Common/Image/logo.png",
+  "features": [
+    { "name": "system.prompt" },
+    { "name": "system.router" },
+    { "name": "system.shortcut" },
+    { "name": "system.fetch" },
+    { "name": "system.webview" },
+    { "name": "system.storage" },
+    { "name": "system.clipboard" },
+    { "name": "system.share" }
+  ],
+  "permissions": [
+    { "origin": "*" }
+  ],
+  "config": {
+    "logLevel": "debug"
+  },
+  "router": {
+    "entry": "KdBottom",
+    "pages": {
+     
+      "Webview": {
+        "component": "index"
+      },
+     
+      "Home":{
+        "component":"kdIndex"
+      },
+      "KdBottom":{
+        "component":"index"
+      },
+      "Login":{
+        "component":"index"
+      }
+    }
+  },
+  "display": {
+    "titleBar": true,
+    "titleBarBackgroundColor": "#24b9ff",
+    "titleBarTextColor": "#ffffff",
+    "titleBarText": "首页",
+    "pages": {
+
+      "Home": {
+        "titleBar": false
+      },
+
+    }
+  }
+}

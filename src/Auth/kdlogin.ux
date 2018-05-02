@@ -1,0 +1,64 @@
+<style lang="less">
+    @height:90px;
+    @fontSize:30px;
+     .login_div{flex-direction: column;width: 100%;align-items: center; }
+     .login_top{height: 326px;width: 100%;justify-content: center;align-items: center;}
+     .logo_img{width:290px;height:120px;}
+     .remember_div{width: 640px; justify-content: space-between; height: @height;  }
+     .icon_member{width: 35px;height: 35px; }
+     .remiber_div{justify-content: space-between; align-items: center; height: @height; }
+     .remember_text{ font-size:  @fontSize ;color: #666666; margin-left:20px; }
+     .foget_text{ font-size:  @fontSize ;color: #ff7200 }
+</style>
+<template>
+    <div class="login_div">
+        <div class="login_top">
+            <image src="../Common/Image/kdimg/login/logo.png" class="logo_img"></image>
+        </div>
+      <input-pwd ispwd="" iconimg="../Common/Image/kdimg/login/phone.png" @inputchange="inputPhone"></input-pwd>
+      <input-pwd ispwd="true" iconimg="../Common/Image/kdimg/login/pwd.png" @inputchange="inputPwd"></input-pwd>
+      <div class="remember_div">
+        <div class="remiber_div">
+            <div if="{{remember}}" @click="toChangeRemember"> <image src="../Common/Image/kdimg/login/selected@2x.png"  class="icon_member"></image></div>
+            <div else  @click="toChangeRemember"><image src="../Common/Image/kdimg/login/marquee@2x.png"  class="icon_member"></image> </div>
+            <div style="justify-content:flex-end;"> <text class="remember_text">记住我</text> </div>
+        </div>
+         <div style="height:90px;align-items: center;"><text class="foget_text">忘记密码？</text></div>
+      </div>
+      <c-btn btntext="登录" @clickbtn="toLogin"></c-btn>
+    </div>
+</template>
+<import name="input-pwd" src="../Common/Component/CInput/kdIndex.ux"></import>
+<import name="c-btn" src="../Common/Component/CButton/index.ux"></import>
+<script>
+    import UserService from '../Common/Api/kedou/user.js'
+    // 坑二: 在文件中使用 return形式 在组件中使用 函数形式 data
+export default {
+  data(){
+      return{
+        user_mobile : '',
+        user_pass : '',
+        remember:true
+      }
+  },
+  inputPhone({detail:{value}}){
+      this.user_mobile = value;
+  },
+  inputPwd({detail:{value}}){
+    this.user_pass = value
+  },
+  toChangeRemember(){
+      this.remember = ! this.remember;
+  },
+  toLogin(){
+      let param = {"user_mobile":that.user_mobile,
+                   "user_pass":that.user_pass }
+    UserService.login(param).then(res=>{
+      console.log("res=>",res)
+    }).catch(err=>{
+        console.log("err====>",err)
+    })
+  }
+}
+
+</script>

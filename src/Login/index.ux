@@ -1,0 +1,109 @@
+<style lang="less">
+    @height:90px;
+    @fontSize:30px;
+     .login_div{flex-direction: column;width: 100%;align-items: center; }
+     .login_top{height: 326px;width: 100%;justify-content: center;align-items: center;}
+     .logo_img{width:290px;height:120px;}
+     .remember_div{width: 640px; justify-content: space-between; height: @height;  }
+     .icon_member{width: 35px;height: 35px; }
+     .remiber_div{justify-content: space-between; align-items: center; height: @height; }
+     .remember_text{ font-size:  @fontSize ;color: #666666; margin-left:20px; }
+     .foget_text{ font-size:  @fontSize ;color: #ff7200 }
+</style>
+<template>
+    <div class="login_div">
+        <div class="login_top">
+            <image src="../Common/Image/kdimg/login/logo.png" class="logo_img"></image>
+        </div>
+      <input-pwd ispwd="" iconimg="../Common/Image/kdimg/login/phone.png" @inputchange="inputPhone"></input-pwd>
+      <input-pwd ispwd="true" iconimg="../Common/Image/kdimg/login/pwd.png" @inputchange="inputPwd"></input-pwd>
+      <div class="remember_div">
+        <div class="remiber_div">
+            <div if="{{remember}}" @click="toChangeRemember"> <image src="../Common/Image/kdimg/login/selected@2x.png"  class="icon_member"></image></div>
+            <div else  @click="toChangeRemember"><image src="../Common/Image/kdimg/login/marquee@2x.png"  class="icon_member"></image> </div>
+            <div style="justify-content:flex-end;"> <text class="remember_text">记住我</text> </div>
+        </div>
+         <div style="height:90px;align-items: center;"><text class="foget_text">忘记密码？</text></div>
+      </div>
+      <c-btn btntext="登录" @clickbtn="toLogin"></c-btn>
+    </div>
+</template>
+<import name="input-pwd" src="../Common/Component/CInput/kdIndex.ux"></import>
+<import name="c-btn" src="../Common/Component/CButton/index.ux"></import>
+<script>
+    import {login} from '../Common/Api/kduser.js'
+    // 坑二: 在文件中使用 return形式 在组件中使用 函数形式 data
+export default {
+  data(){
+      return{
+        loginData:{
+          user_mobile : '',
+          user_pass : ''
+        },
+        user_mobile:'',
+        remember:true
+      }
+  },
+  onInit() {
+    let that = this;
+    this.$app.$def.storage.get({
+      key:'userRember',
+      success:function(data){
+         if(data){
+           let dataMsg = JSON.parse(data);
+           that.$broadcast("pChangeInput",{value:dataMsg.user_mobile});
+         }
+      }.bind(this),
+      fail:function(data,code){
+       console.log("获取token失效")
+      }.bind(this)
+    })
+},
+  inputPhone({detail:{value}}){
+      this.loginData.user_mobile = value;
+  },
+  inputPwd({detail:{value}}){
+    this.loginData.user_pass = value
+  },
+  toChangeRemember(){
+      this.remember = ! this.remember;
+  },
+  toLogin(){
+      let that = this;
+   if(that.loginData.user_mobile === null || that.loginData.user_pass.length < 1) {
+      this.$app.$def.prompt.showToast({ message: '用户名长度不能小于6' })
+    } else {
+      login(this.loginData.user_mobile,this.loginData.user_pass)
+        .then((data) => {
+         if(that.remember){//如果是记住密码
+            let dataMsg  = data[0];
+            that.$app.$def.storage.set({
+              key:'userRember',
+              value:dataMsg
+            })
+          }else{
+            that.$app.$def.storage.set({
+              key:'userRember',
+              value:''
+            })
+          }
+
+          //跳转到个人主页
+          that.$app.$def.router.push({
+            uri:'KdBottom'
+          })
+        })
+        .catch((err) => {
+          console.log("登录出错了--->",JSON.stringify(err))
+          this.$app.$def.prompt.showToast({ message: err })
+        })
+    }
+    // UserService.login(param).then(res=>{
+    //   console.log("res=>",res)
+    // }).catch(err=>{
+    //     console.log("err====>",err)
+    // })
+  }
+}
+
+</script>

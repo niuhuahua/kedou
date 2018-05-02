@@ -1,0 +1,97 @@
+{
+  "package": "cn.codebear.wanandroid",
+  "name": "wanandroid",
+  "versionName": "1.0.2",
+  "versionCode": "3",
+  "minPlatformVersion": "101",
+  "icon": "/Common/Image/logo.png",
+  "features": [
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.shortcut"
+    },
+    {
+      "name": "system.fetch"
+    },
+    {
+      "name": "system.webview"
+    },
+    {
+      "name": "system.storage"
+    },
+    {
+      "name": "system.clipboard"
+    },
+    {
+      "name": "system.share"
+    }
+  ],
+  "permissions": [
+    {
+      "origin": "*"
+    }
+  ],
+  "config": {
+    "logLevel": "debug"
+  },
+  "router": {
+    "entry": "KdBottom",
+    "pages": {
+      "Wanandroid": {
+        "component": "index"
+      },
+      "Webview": {
+        "component": "index"
+      },
+      "CollectArticleList": {
+        "component": "index"
+      },
+      "AddCollectArticle": {
+        "component": "index"
+      },
+      "CollectWebList": {
+        "component": "index"
+      },
+      "AddCollectWeb": {
+        "component": "index"
+      },
+      "Home": {
+        "component": "kdIndex"
+      },
+      "KdBottom": {
+        "component": "index"
+      },
+      "Login": {
+        "component": "index"
+      }
+    }
+  },
+  "display": {
+    "titleBar": true,
+    "titleBarBackgroundColor": "#24b9ff",
+    "titleBarTextColor": "#ffffff",
+    "titleBarText": "首页",
+    "pages": {
+      "CollectArticleList": {
+        "titleBar": false
+      },
+      "Home": {
+        "titleBar": false
+      },
+      "AddCollectArticle": {
+        "titleBarText": "收藏站外文章"
+      },
+      "CollectWebList": {
+        "titleBar": false
+      },
+      "AddCollectWeb": {
+        "titleBarText": "收藏网站"
+      }
+    }
+  }
+}
